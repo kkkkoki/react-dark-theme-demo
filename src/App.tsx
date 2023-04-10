@@ -1,7 +1,6 @@
 import "./App.css";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 import { css } from "@emotion/react";
-import { mq } from "./utils/mediaQuerise";
 import { useState } from "react";
 
 function App() {
