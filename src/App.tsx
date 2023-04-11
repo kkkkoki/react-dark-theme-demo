@@ -55,6 +55,16 @@ function App() {
       zIndex: -1,
       transition: ".5s",
     }),
+
+    animateBackGround: css({
+      position: "absolute",
+      width: "100%",
+      height: "100vh",
+      background: "#f8f8f8",
+      zIndex: -2,
+      clipPath: checked ? "circle(100% at 50% 50%)" : "circle(0% at 50% 50%)",
+      transition: "1.5s ease-out",
+    }),
   };
 
   return (
@@ -68,6 +78,7 @@ function App() {
         <MoonIcon css={classes.moon} />
         <SunIcon css={classes.sun} />
         <span css={classes.toggle}></span>
+        <span css={classes.animateBackGround}></span>
       </label>
     </>
   );
