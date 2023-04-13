@@ -5,7 +5,6 @@ import { css, useTheme } from "@emotion/react";
 const EmotionAnimationButton = () => {
   const theme = useTheme();
   const { mode }: any = { ...theme };
-
   const isDark = mode === "dark";
   const [checked, setChecked] = useState(isDark);
 
@@ -53,8 +52,8 @@ const EmotionAnimationButton = () => {
 
     animateBackGround: css({
       position: "fixed",
-      width: "500vmax",
-      height: "500vmax",
+      width: "300vh",
+      height: "200vh",
       background: "#f8f8f8",
       zIndex: -2,
       clipPath: checked ? "circle(100% at center)" : "circle(0% at center)",
