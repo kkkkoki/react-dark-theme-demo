@@ -1,6 +1,7 @@
 import "./App.css";
 import { ThemeProvider } from "@emotion/react";
 import EmotionAnimationButton from "./components/EmotionAnimationButton";
+import ThemeToggleButton from "./components/MotionAnimationButton";
 
 const theme = {
   light: {
@@ -18,11 +19,11 @@ const theme = {
 
 function App() {
   const isDark = localStorage.getItem("theme") === "dark";
-  console.log(isDark);
 
   return (
     <ThemeProvider theme={isDark ? theme.dark : theme.light}>
-      <EmotionAnimationButton />
+      {/* <EmotionAnimationButton /> */}
+      <ThemeToggleButton isDark={isDark} />
     </ThemeProvider>
   );
 }
