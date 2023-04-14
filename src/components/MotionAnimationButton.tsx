@@ -5,14 +5,14 @@ import React, { useState } from "react";
 
 interface ThemeToggleButtonProps {
   toggle?: () => void;
-  isDark: boolean;
+  isDarkMode: boolean;
 }
 
 const MotionAnimationButton: React.FC<ThemeToggleButtonProps> = ({
   toggle,
-  isDark,
+  isDarkMode,
 }) => {
-  const [dark, setDark] = useState(isDark);
+  const [isDark, setIsDark] = useState(isDarkMode);
   const [isInit, setIsInit] = useState(true);
 
   const classes = {
@@ -43,15 +43,15 @@ const MotionAnimationButton: React.FC<ThemeToggleButtonProps> = ({
       setIsInit(false);
     }
 
-    setDark(!dark);
-    localStorage.setItem("theme", dark ? "ligth" : "dark");
+    setIsDark(!isDark);
+    localStorage.setItem("theme", isDark ? "ligth" : "dark");
   };
 
   const animationVariants: Variants = {
     initial: { scale: isInit ? 1 : 0 },
 
     animate: {
-      rotate: `${dark ? "360deg" : "-360deg"}`,
+      rotate: `${isDark ? "360deg" : "-360deg"}`,
       scale: 1,
       transition: { duration: 0.5 },
     },
@@ -65,7 +65,7 @@ const MotionAnimationButton: React.FC<ThemeToggleButtonProps> = ({
 
   return (
     <AnimatePresence mode="wait">
-      {dark ? (
+      {isDark ? (
         <motion.button
           css={classes.button}
           onClick={() => handle()}

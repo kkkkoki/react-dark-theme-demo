@@ -23,7 +23,7 @@ function App() {
   return (
     <ThemeProvider theme={isDark ? theme.dark : theme.light}>
       {/* <EmotionAnimationButton /> */}
-      <ThemeToggleButton isDark={isDark} />
+      <ThemeToggleButton isDarkMode={isDark} />
     </ThemeProvider>
   );
 }
