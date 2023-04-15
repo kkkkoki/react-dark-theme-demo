@@ -66,12 +66,22 @@ function App() {
     }),
 
     themeToggle: css({
+      position: "relative",
       display: "flex",
       alignItems: "center",
     }),
 
     animateBg: css({
       position: "absolute",
+      background: isDark ? theme.dark.background : theme.light.background,
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: "200vmax",
+      height: "150vmax",
+      clipPath: isDark ? "circle(100% at center)" : "circle(0% at center)",
+      transition: "1.5s ease-out",
+      zIndex: -2,
     }),
   };
   return (
@@ -95,6 +105,8 @@ function App() {
             </a>
           </div>
           <div css={classes.themeToggle}>
+            {/* 多分アニメーションするbgのコンポーネントwrapperを作ったほうがよい（
+            現状stateの変更でapptsxが再レンダリングされるので、先にbgの色が変更されてアニメーションしているのか視認できない状態） */}
             <ThemeToggleButton isDarkMode={isDark} toggle={setIsDark} />
             <span css={classes.animateBg}></span>
           </div>
