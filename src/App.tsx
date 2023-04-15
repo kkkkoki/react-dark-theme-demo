@@ -1,6 +1,6 @@
+import { Global, ThemeProvider, css } from "@emotion/react";
+import { useState } from "react";
 import "./App.css";
-import { ThemeProvider } from "@emotion/react";
-import EmotionAnimationButton from "./components/EmotionAnimationButton";
 import ThemeToggleButton from "./components/MotionAnimationButton";
 
 const theme = {
@@ -18,12 +18,88 @@ const theme = {
 };
 
 function App() {
-  const isDark = localStorage.getItem("theme") === "dark";
+  const [isDark, setIsDark] = useState<boolean>(
+    localStorage.getItem("theme") === "dark"
+  );
 
+  // 本来は肥大化を防ぐ為にstyles/global.tsとかに記述
+  const globalStyle = css({
+    body: {
+      color: isDark ? theme.dark.color : theme.light.color,
+      background: isDark ? theme.dark.background : theme.light.background,
+    },
+  });
+
+  const classes = {
+    header: css({
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      height: 56,
+      padding: "0 24px",
+      borderBottom: `solid 1px ${
+        isDark ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.12)"
+      }`,
+      a: {
+        textDecoration: "none",
+      },
+    }),
+
+    layout: css({
+      display: "flex",
+      alignItems: "center",
+      gap: "24px",
+    }),
+
+    logo: css({
+      fontSize: "32px",
+      color: isDark ? theme.dark.color : theme.light.color,
+    }),
+
+    links: css({
+      display: "flex",
+      gap: "24px",
+    }),
+
+    link: css({
+      color: isDark ? theme.dark.color : theme.light.color,
+    }),
+
+    themeToggle: css({
+      display: "flex",
+      alignItems: "center",
+    }),
+
+    animateBg: css({
+      position: "absolute",
+    }),
+  };
   return (
     <ThemeProvider theme={isDark ? theme.dark : theme.light}>
       {/* <EmotionAnimationButton /> */}
-      <ThemeToggleButton isDarkMode={isDark} />
+      <Global styles={globalStyle} />
+      <header css={classes.header}>
+        <a href="#">
+          <h1 css={classes.logo}>LOGO</h1>
+        </a>
+        <div css={classes.layout}>
+          <div css={classes.links}>
+            <a css={classes.link} href="#">
+              About
+            </a>
+            <a css={classes.link} href="#">
+              Contact
+            </a>
+            <a css={classes.link} href="#">
+              Search
+            </a>
+          </div>
+          <div css={classes.themeToggle}>
+            <ThemeToggleButton isDarkMode={isDark} toggle={setIsDark} />
+            <span css={classes.animateBg}></span>
+          </div>
+        </div>
+      </header>
     </ThemeProvider>
   );
 }

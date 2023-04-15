@@ -1,10 +1,10 @@
 import { css } from "@emotion/react";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 import { AnimatePresence, Variants, motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 
 interface ThemeToggleButtonProps {
-  toggle?: () => void;
+  toggle: Dispatch<SetStateAction<boolean>>;
   isDarkMode: boolean;
 }
 
@@ -17,10 +17,12 @@ const MotionAnimationButton: React.FC<ThemeToggleButtonProps> = ({
 
   const classes = {
     button: css({
-      width: 80,
-      height: 80,
-      background: "#242424",
+      width: 40,
+      height: 40,
+      background: "inherit",
       border: "none",
+      padding: 0,
+      cursor: "pointer",
     }),
 
     icon: css({
@@ -45,6 +47,7 @@ const MotionAnimationButton: React.FC<ThemeToggleButtonProps> = ({
 
     setIsDark(!isDark);
     localStorage.setItem("theme", isDark ? "ligth" : "dark");
+    toggle(!isDark);
   };
 
   const animationVariants: Variants = {
@@ -69,6 +72,7 @@ const MotionAnimationButton: React.FC<ThemeToggleButtonProps> = ({
         <motion.button
           css={classes.button}
           onClick={() => handle()}
+          type="button"
           key="sun"
           initial="initial"
           animate="animate"
@@ -81,6 +85,7 @@ const MotionAnimationButton: React.FC<ThemeToggleButtonProps> = ({
         <motion.button
           css={classes.button}
           onClick={() => handle()}
+          type="button"
           key="moon"
           initial="initial"
           animate="animate"
