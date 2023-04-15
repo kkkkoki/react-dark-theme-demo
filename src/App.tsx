@@ -27,6 +27,7 @@ function App() {
     body: {
       color: isDark ? theme.dark.color : theme.light.color,
       background: isDark ? theme.dark.background : theme.light.background,
+      transition: ".5s ease-in",
     },
   });
 
@@ -105,8 +106,6 @@ function App() {
             </a>
           </div>
           <div css={classes.themeToggle}>
-            {/* 多分アニメーションするbgのコンポーネントwrapperを作ったほうがよい（
-            現状stateの変更でapptsxが再レンダリングされるので、先にbgの色が変更されてアニメーションしているのか視認できない状態） */}
             <ThemeToggleButton isDarkMode={isDark} toggle={setIsDark} />
             <span css={classes.animateBg}></span>
           </div>
